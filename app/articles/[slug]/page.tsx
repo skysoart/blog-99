@@ -4,6 +4,7 @@ import { getArticleBySlug } from "@/lib/articles"
 import { Badge } from "@/components/ui/badge"
 import { SocialShare } from "@/components/social-share"
 import { RelatedArticles } from "@/components/related-articles"
+import { BackToTop } from "@/components/back-to-top"
 
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = await getArticleBySlug(params.slug)
@@ -34,15 +35,43 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
         <div className="prose prose-invert mt-8 max-w-none leading-relaxed">
           {article.content.map((block, i) => {
-            if (block.type === "h2") return <h2 key={i}>{block.text}</h2>
-            if (block.type === "p") return <p key={i}>{block.text}</p>
+            if (block.type === "h2")
+              return (
+                <h2 key={i} className="text-2xl font-bold mt-8 mb-4 text-teal-400">
+                  {block.text}
+                </h2>
+              )
+            if (block.type === "p")
+              return (
+                <p key={i} className="mb-4 text-gray-300 leading-relaxed">
+                  {block.text}
+                </p>
+              )
+            if (block.type === "list")
+              return (
+                <ul key={i} className="mb-6 ml-6 list-disc space-y-2 text-gray-300">
+                  {block.items.map((item, j) => (
+                    <li key={j} className="leading-relaxed">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )
             if (block.type === "code")
               return (
-                <pre key={i}>
-                  <code>{block.text}</code>
+                <pre key={i} className="my-4 rounded-lg bg-gray-900 p-4 overflow-x-auto">
+                  <code className="text-sm text-gray-300">{block.text}</code>
                 </pre>
               )
-            if (block.type === "img") return <img key={i} src={block.src || "/placeholder.svg"} alt={block.alt} />
+            if (block.type === "img")
+              return (
+                <img
+                  key={i}
+                  src={block.src || "/placeholder.svg"}
+                  alt={block.alt}
+                  className="my-6 rounded-lg w-full border border-border"
+                />
+              )
             return null
           })}
         </div>
@@ -56,6 +85,8 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
         <RelatedArticles slug={article.slug} tags={article.tags} />
       </article>
+
+      <BackToTop />
     </main>
   )
 }

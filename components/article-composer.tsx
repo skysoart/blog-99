@@ -29,7 +29,7 @@ export function ArticleComposer() {
   const [title, setTitle] = useState("")
   const [excerpt, setExcerpt] = useState("")
   const [category, setCategory] = useState("")
-  const [author, setAuthor] = useState("TechPulse Editors")
+  const [author, setAuthor] = useState("TechOz Editors")
   const [readingTime, setReadingTime] = useState(6)
   const [tags, setTags] = useState("ai, productivity")
   const [image, setImage] = useState("/placeholder.jpg")
