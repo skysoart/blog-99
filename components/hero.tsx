@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { TopicsDialog } from "@/components/topics-dialog"
 
 export function Hero() {
   return (
@@ -14,9 +13,6 @@ export function Hero() {
             <Link href="#articles" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Articles
             </Link>
-            {/* <Link href="#newsletter" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Newsletter
-            </Link> */}
           </div>
         </nav>
 
@@ -30,11 +26,6 @@ export function Hero() {
             <Link href="#articles">
               <Button className="bg-blue-500 text-white hover:bg-blue-600">Start reading</Button>
             </Link>
-            <TopicsDialog>
-              <Button variant="secondary" className="border border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
-                View topics
-              </Button>
-            </TopicsDialog>
           </div>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-5 gap-6 opacity-70">
             <div className="text-xs text-muted-foreground">AI</div>

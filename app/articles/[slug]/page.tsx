@@ -1,10 +1,6 @@
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getArticleBySlug } from "@/lib/articles"
 import { Badge } from "@/components/ui/badge"
-import { SocialShare } from "@/components/social-share"
-import { RelatedArticles } from "@/components/related-articles"
-import { BackToTop } from "@/components/back-to-top"
 
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = await getArticleBySlug(params.slug)
@@ -65,28 +61,17 @@ export default async function ArticlePage({ params }: { params: { slug: string }
               )
             if (block.type === "img")
               return (
-                <img
-                  key={i}
-                  src={block.src || "/placeholder.svg"}
-                  alt={block.alt}
-                  className="my-6 rounded-lg w-full border border-border"
-                />
+                <div key={i} className="flex justify-center my-8">
+                  <img
+                    src={block.src || "/placeholder.svg"}
+                    alt={block.alt}
+                    className="max-w-2xl w-full rounded-lg border border-border shadow-lg"
+                  />
+                </div>
               )
-            return null
           })}
         </div>
-
-        <div className="mt-8 flex items-center gap-3">
-          <SocialShare url={`https://example.com/articles/${article.slug}`} title={article.title} />
-          <Link href="/" className="text-sm text-blue-400 hover:underline">
-            ← Back to home
-          </Link>
-        </div>
-
-        <RelatedArticles slug={article.slug} tags={article.tags} />
       </article>
-
-      <BackToTop />
     </main>
   )
 }
